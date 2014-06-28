@@ -10,8 +10,92 @@ window.requestAnimFrame = (function(){
     };
 })();
 
+/*
+var context,canvas;
+var init=function(scope,options){
 
-var canvas, context, deg=1;
+  canvas = document.createElement( 'canvas' );
+  canvas.width = screen.width;
+  canvas.height = screen.height;
+  document.body.appendChild(canvas);
+  context = canvas.getContext( '2d' );
+  context.strokeStyle = 'rgb(0,0,0)';
+  context.lineWidth=1;
+  context.fillStyle = 'rgb(255,255,255)';
+  context.beginPath();
+  context.rect(0,0,canvas.width,canvas.height);
+  context.fill();
+
+};
+
+
+var Square=function(params){
+  this.params=params?params:{
+    center:[-(screen.width/2),0],
+    size:100,
+    rotation:0,
+    twist:0,
+    depth:0,
+    max_depth:10
+  };
+
+  this.draw=function(){
+
+    context.save();
+    context.translate(canvas.width/2,canvas.height/2);
+    context.beginPath();
+
+    //context.translate(-(this.params.size/2),-(this.params.size/2));
+    //context.rotate(this.params.rotation*(Math.PI/180));
+    //context.translate(this.params.size/2,this.params.size/2);
+
+    context.rotate(this.params.rotation*(Math.PI/180));
+    context.rect((this.params.center[0]-(this.params.size/2)),
+                 (this.params.center[1]-(this.params.size/2)),
+                 this.params.size,
+                 this.params.size);
+
+    context.stroke();
+
+    context.restore();
+
+  };
+
+  this.mutate=function(params){
+    params.center[0]+=100;
+    params.center[1]+=0;
+    params.rotation+=10;
+    params.twist+=0;
+    params.size+=0;
+    return params;
+  };
+
+  this.spawn=function(){
+    this.params.depth++;
+    var new_params;
+    new_params=this.mutate(JSON.parse(JSON.stringify(this.params)));
+    this.child=new Square(new_params);
+    this.child.spawn();
+
+  };
+
+
+  this.draw();
+  if(this.params.depth<this.params.max_depth){
+    this.spawn();
+  }
+  return this;
+};
+
+
+
+
+init();
+var square=new Square();
+
+*/
+
+ var canvas, context, deg=1;
 
 init();
 animate();
@@ -26,10 +110,7 @@ function init() {
 
   document.body.appendChild( canvas );
   context.strokeStyle = 'rgb(200,200,20)';
-  context.fillStyle = 'rgb(20,200,200)';
-  //context.rect(5,5,490,490);
 
-  context.stroke();
 }
 
 function animate() {
